@@ -28,7 +28,7 @@ export default class DefaultGroupSettingsModal extends Modal {
           <div className="Form-group">
             {Button.component({
               type: 'submit',
-              className: 'Button Button--primary DefaulgGroupSettingsModal-save',
+              className: 'Button Button--primary DefaultGroupSettingsModal-save',
               loading: this.loading,
               children: 'Save Changes'
             })}
