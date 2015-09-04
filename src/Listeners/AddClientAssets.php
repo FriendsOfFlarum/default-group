@@ -25,7 +25,7 @@ class AddClientAssets
             __DIR__.'/../../less/admin/extension.less'
         ]);
 
-        $event->adminBootstrapper('default_group/main');
+        $event->adminBootstrapper('default-group/main');
 
         $event->adminTranslations([
         ]);

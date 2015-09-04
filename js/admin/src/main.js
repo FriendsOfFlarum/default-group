@@ -3,6 +3,6 @@ import app from 'flarum/app';
 
 import DefaultGroupSettingsModal from 'default-group/components/DefaultGroupSettingsModal';
 
-app.initializers.add('default_group', app => {
+app.initializers.add('default-group', app => {
   app.extensionSettings.default_group = () => app.modal.show(new DefaultGroupSettingsModal());
 });
