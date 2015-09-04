@@ -12,13 +12,17 @@ export default class DefaultGroupSettingsModal extends Modal {
     const user = app.session.user;
 
     this.defaultGroup = app.config['hyn.default_group.group'] || Group.MEMBER_ID;
-    //this.group = app.store.all('groups').findById(this.defaultGroup
+    this.group = app.store.getById('groups', this.defaultGroup);
+
     this.groups = app.store.all('groups')
         .filter(group => [Group.GUEST_ID].indexOf(group.id()) === -1)
         .map(group => Button.component({
             children: [GroupBadge.component({group, label: null}), ' ', group.namePlural()],
-            icon: group.id() == this.defaultGroup ? 'check' : true,
-            active: group.id() == this.defaultGroup
+            active: group.id() == this.defaultGroup ? true : null,
+            onclick:  (e) => {
+              e.stopPropagation();
+              this.save(group.id());
+            }
         }));
   }
 
@@ -32,47 +36,37 @@ export default class DefaultGroupSettingsModal extends Modal {
 
   content() {
     return (
-      <div className="Modal-body">
+      <div className="Modal-body" style="min-height: 400px">
         <div className="Form">
 
 
           <div className="Form-group">
             <label>Default group</label>
             <div className="Form-group">
+
               {SelectDropdown.component({
-                  key: 'hyn.default_group.group',
                   children: this.groups
               })}
 
             </div>
           </div>
 
-          <div className="Form-group">
-            {Button.component({
-              type: 'submit',
-              className: 'Button Button--primary DefaultGroupSettingsModal-save',
-              loading: this.loading,
-              children: 'Save Changes'
-            })}
-          </div>
         </div>
       </div>
     );
   }
-  //
-  //onsubmit(e) {
-  //  e.preventDefault();
-  //
-  //  this.loading = true;
-  //
-  //  saveConfig({
-  //    'hyn.default_group.group': this.defaultGroup()
-  //  }).then(
-  //    () => this.hide(),
-  //    () => {
-  //      this.loading = false;
-  //      m.redraw();
-  //    }
-  //  );
-  //}
+
+  save(groupId) {
+    this.loading = true;
+
+    saveConfig({
+      'hyn.default_group.group': groupId
+    }).then(
+      () => this.hide(),
+      () => {
+        this.loading = false;
+        m.redraw();
+      }
+    );
+  }
 }
