@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
 base=${PWD}
-release=/tmp/recaptcha-release
+
+extension=$(php <<CODE
+<?php
+\$flarum = json_decode(file_get_contents('flarum.json'), true);
+echo array_key_exists('name', \$flarum) ? \$flarum['name'] : '';
+CODE
+)
+
+release=/tmp/${extension}
 
 rm -rf ${release}
 mkdir ${release}
@@ -47,4 +55,4 @@ cd ${release}
 find . -type d -exec chmod 0750 {} +
 find . -type f -exec chmod 0644 {} +
 chmod 0775 .
-zip -r recaptcha.zip ./
+zip -r ${extension}.zip ./
