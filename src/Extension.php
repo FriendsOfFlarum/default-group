@@ -9,6 +9,7 @@ class Extension extends BaseExtension
     {
         $events->subscribe(Listeners\AddApiAttributes::class);
         $events->subscribe(Listeners\AddClientAssets::class);
+        $events->subscribe(Listeners\AddDefaultGroup::class);
     }
 
     public function boot()

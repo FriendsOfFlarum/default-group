@@ -15,15 +15,7 @@ export default class DefaultGroupSettingsModal extends Modal {
     this.group = app.store.getById('groups', this.defaultGroup);
 
     this.groups = app.store.all('groups')
-        .filter(group => [Group.GUEST_ID].indexOf(group.id()) === -1)
-        .map(group => Button.component({
-            children: [GroupBadge.component({group, label: null}), ' ', group.namePlural()],
-            active: group.id() == this.defaultGroup ? true : null,
-            onclick:  (e) => {
-              e.stopPropagation();
-              this.save(group.id());
-            }
-        }));
+        .filter(group => [Group.GUEST_ID].indexOf(group.id()) === -1);
   }
 
   className() {
@@ -44,9 +36,10 @@ export default class DefaultGroupSettingsModal extends Modal {
             <label>Default group</label>
             <div className="Form-group">
 
-              {SelectDropdown.component({
-                  children: this.groups
-              })}
+              {this.groups.map(group =>
+                this.radio(group)
+              )}
+
 
             </div>
           </div>
@@ -56,17 +49,29 @@ export default class DefaultGroupSettingsModal extends Modal {
     );
   }
 
-  save(groupId) {
-    this.loading = true;
+  radio(option) {
+    let className = 'Checkbox ' + (option.id() == this.defaultGroup ? 'on' : 'off');
+    if (this.loading) className += ' loading';
+    return (
+      <label className={className}>
+        <input type="radio"
+          value={option.id()}
+          checked={option.id() == this.defaultGroup}
+          onchange={m.withAttr('value'), this.save.bind(this)}
+          />
+        {GroupBadge.component({group: option})} {option.namePlural()}
+      </label>
+    );
+  }
 
+  save(e, groupId) {
+    this.loading = true;
     saveConfig({
-      'hyn.default_group.group': groupId
+      'hyn.default_group.group': e.target.value
     }).then(
-      () => this.hide(),
-      () => {
-        this.loading = false;
-        m.redraw();
-      }
+      () => this.hide()
+        //,
+      //() => m.redraw()
     );
   }
 }
