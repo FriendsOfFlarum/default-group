@@ -3,7 +3,7 @@
     "title": "Default group",
     "description": "Assign a default group to new users automatically.",
     "keywords": ["grouping"],
-    "version": "0.1.0",
+    "version": "0.3.0",
     "author": {
         "name": "Daniel Klabbers",
         "email": "daniel+flarum@klabbers.email",
