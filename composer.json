@@ -1,7 +1,36 @@
 {
+    "name": "hyn/default-group",
+    "description": "Assign a default group to new users automatically.",
+    "type": "flarum-extension",
+    "keywords": ["grouping"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniël Klabbers",
+            "email": "daniel+flarum@klabbers.email",
+            "homepage": "http://hyn.io"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/hyn/flarum-default-group/issues",
+        "source": "https://github.com/hyn/flarum-default-group"
+    },
+    "require": {
+        "flarum/core": "^0.1.0-beta.3"
+    },
     "autoload": {
         "psr-4": {
             "Hyn\\DefaultGroup\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Default group",
+            "icon": {
+                "name": "users",
+                "backgroundColor": "#539EC1",
+                "color": "#fff"
+            }
         }
     }
 }
