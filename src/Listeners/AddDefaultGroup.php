@@ -1,9 +1,10 @@
 <?php namespace Hyn\DefaultGroup\Listeners;
 
+use Flarum\Event\UserWasActivated;
+use Flarum\Core\Group;
+
+use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
-use Flarum\Events\UserWasActivated;
-use Flarum\Core\Groups\Group;
-use Flarum\Core\Settings\SettingsRepository;
 
 class AddDefaultGroup
 {
@@ -17,7 +18,7 @@ class AddDefaultGroup
      */
     protected $defaultGroup;
 
-    public function __construct(SettingsRepository $settings) {
+    public function __construct(SettingsRepositoryInterface $settings) {
         $this->settings = $settings;
 
         $this->defaultGroup = (int) $this->settings->get('hyn.default_group.group', Group::MEMBER_ID);
@@ -37,8 +38,9 @@ class AddDefaultGroup
      * @param UserWasActivated $event
      */
     public function addGroup(UserWasActivated $event) {
-        if($this->defaultGroup == Group::MEMBER_ID)
+        if($this->defaultGroup == Group::MEMBER_ID) {
             return;
+        }
         $event->user->groups()->attach($this->defaultGroup);
     }
 }

@@ -1,21 +1,31 @@
 <?php namespace Hyn\DefaultGroup\Listeners;
 
-use Flarum\Events\ApiAttributes;
-use Flarum\Events\RegisterApiRoutes;
+use Flarum\Event\PrepareApiAttributes;
+use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
-use Flarum\Api\Serializers\ForumSerializer;
 
 class AddApiAttributes
 {
-    public function subscribe(Dispatcher $events)
+    /**
+     * @var SettingsRepositoryInterface
+     */
+    protected $settings;
+
+    public function __construct(SettingsRepositoryInterface $settings)
     {
-        $events->listen(ApiAttributes::class, [$this, 'addAttributes']);
+        $this->settings = $settings;
     }
 
-    public function addAttributes(ApiAttributes $event)
+    public function subscribe(Dispatcher $events)
+    {
+        $events->listen(PrepareApiAttributes::class, [$this, 'addAttributes']);
+    }
+
+    public function addAttributes(PrepareApiAttributes $event)
     {
         if ($event->serializer instanceof ForumSerializer) {
-            $event->attributes['defaultUserGroup'] = app('Flarum\Core\Settings\SettingsRepository')->get('hyn.default_group.group');
+            $event->attributes['defaultUserGroup'] = $this->settings->get('hyn.default_group.group');
         }
     }
 }

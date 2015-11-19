@@ -2,6 +2,6 @@ var gulp = require('flarum-gulp');
 
 gulp({
   modules: {
-    'default-group': 'src/**/*.js'
+    'hyn/default-group': 'src/**/*.js'
   }
 });

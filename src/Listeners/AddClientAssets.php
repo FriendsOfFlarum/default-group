@@ -1,5 +1,6 @@
 <?php namespace Hyn\DefaultGroup\Listeners;
 
+use Flarum\Event\ConfigureClientView;
 use Flarum\Events\RegisterLocales;
 use Flarum\Events\BuildClientView;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -8,26 +9,18 @@ class AddClientAssets
 {
     public function subscribe(Dispatcher $events)
     {
-//        $events->listen(RegisterLocales::class, [$this, 'addLocale']);
-        $events->listen(BuildClientView::class, [$this, 'addAssets']);
+        $events->listen(ConfigureClientView::class, [$this, 'addAssets']);
     }
 
-    public function addLocale(RegisterLocales $event)
+    public function addAssets(ConfigureClientView $event)
     {
-        $event->addTranslations('en', __DIR__.'/../../locale/en.yml');
-    }
+        if($event->isAdmin()) {
+            $event->addAssets([
+                __DIR__ . '/../../js/admin/dist/extension.js',
+                __DIR__ . '/../../less/admin/extension.less'
+            ]);
 
-    public function addAssets(BuildClientView $event)
-    {
-
-        $event->adminAssets([
-            __DIR__.'/../../js/admin/dist/extension.js',
-            __DIR__.'/../../less/admin/extension.less'
-        ]);
-
-        $event->adminBootstrapper('default-group/main');
-
-        $event->adminTranslations([
-        ]);
+            $event->addBootstrapper('hyn/default-group/main');
+        }
     }
 }
