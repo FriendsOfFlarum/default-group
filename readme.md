@@ -10,4 +10,4 @@ Allows you to set a default group for any registered user. The current behavior 
 
 - An extension for [flarum](http://flarum.org)
 - [Questions, support and flarum information](http://discuss.flarum.org/d/849-hyn-default-group-assigning-default-group-to-new-users)
-- [Report an issue](https://github.com/hyn-me/flarum-default-group/issues)
+- [Report an issue](https://github.com/hyn/flarum-default-group/issues)
