@@ -11,7 +11,7 @@ export default class DefaultGroupSettingsModal extends Modal {
 
     const user = app.session.user;
 
-    this.defaultGroup = app.config['hyn.default_group.group'] || Group.MEMBER_ID;
+    this.defaultGroup = this.setting('hyn.default_group.group') || Group.MEMBER_ID;
     this.group = app.store.getById('groups', this.defaultGroup);
 
     this.groups = app.store.all('groups')
