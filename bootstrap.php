@@ -1,7 +1,5 @@
 <?php namespace Hyn\DefaultGroup;
 
-require __DIR__.'/vendor/autoload.php';
-
 use Illuminate\Events\Dispatcher;
 
 return function(Dispatcher $events) {
