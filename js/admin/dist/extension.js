@@ -31,7 +31,7 @@ System.register('hyn/default-group/components/DefaultGroupSettingsModal', ['flar
 
           var user = app.session.user;
 
-          this.defaultGroup = app.config['hyn.default_group.group'] || Group.MEMBER_ID;
+          this.defaultGroup = this.setting('hyn.default_group.group') || Group.MEMBER_ID;
           this.group = app.store.getById('groups', this.defaultGroup);
 
           this.groups = app.store.all('groups').filter(function (group) {
