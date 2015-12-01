@@ -1,5 +1,5 @@
 {
-    "name": "hyn/default-group",
+    "name": "hyn/flarum-default-group",
     "description": "Assign a default group to new users automatically.",
     "type": "flarum-extension",
     "keywords": ["grouping"],
