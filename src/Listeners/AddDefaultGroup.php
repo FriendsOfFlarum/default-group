@@ -1,46 +1,40 @@
-<?php namespace Hyn\DefaultGroup\Listeners;
+<?php
 
-use Flarum\Event\UserWasActivated;
-use Flarum\Core\Group;
+/*
+ * This file is part of fof/default-group.
+ *
+ * Copyright (c) 2018 FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
 
+namespace FoF\DefaultGroup\Listeners;
+
+use Flarum\Group\Group;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Illuminate\Contracts\Events\Dispatcher;
+use Flarum\User\Event\Activated;
 
 class AddDefaultGroup
 {
     /**
-     * @var SettingsRepository
+     * @var SettingsRepositoryInterface
      */
     protected $settings;
 
     /**
-     * @var int
+     * @param SettingsRepositoryInterface $settings
      */
-    protected $defaultGroup;
-
-    public function __construct(SettingsRepositoryInterface $settings) {
-        $this->settings = $settings;
-
-        $this->defaultGroup = (int) $this->settings->get('hyn.default_group.group', Group::MEMBER_ID);
-    }
-
-    /**
-     * Subscribe to event dispatcher
-     * @param Dispatcher $events
-     */
-    public function subscribe(Dispatcher $events)
+    public function __construct(SettingsRepositoryInterface $settings)
     {
-        $events->listen(UserWasActivated::class, [$this, 'addGroup']);
+        $this->settings = $settings;
     }
 
-    /**
-     * Attaches the default group to the activated user
-     * @param UserWasActivated $event
-     */
-    public function addGroup(UserWasActivated $event) {
-        if($this->defaultGroup == Group::MEMBER_ID) {
-            return;
+    public function handle(Activated $event) {
+        $defaultGroup = $this->settings->get('fof-default-group.group');
+
+        if ($defaultGroup != null && (int) $defaultGroup !== Group::MEMBER_ID) {
+            $event->user->groups()->attach($defaultGroup);
         }
-        $event->user->groups()->attach($this->defaultGroup);
     }
 }

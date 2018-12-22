@@ -1,13 +1,29 @@
-# default group extension
+# Default Group by FriendsOfFlarum
 
-Allows you to set a default group for any registered user. The current behavior is to assign the hidden group "Members".
+![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/fof/default-group.svg)](https://packagist.org/packages/fof/default-group)
 
-## License
+A [Flarum](http://flarum.org) extension. Assign a default group to new users automatically.
 
-[MIT](https://opensource.org/licenses/MIT)
+![screenshot](https://i.imgur.com/KrEPCC2.png)
 
-## Necessary links
+### Installation
 
-- An extension for [flarum](http://flarum.org)
-- [Questions, support and flarum information](http://discuss.flarum.org/d/849-hyn-default-group-assigning-default-group-to-new-users)
-- [Report an issue](https://github.com/hyn/flarum-default-group/issues)
+Use [Bazaar](https://discuss.flarum.org/d/5151-flagrow-bazaar-the-extension-marketplace) or install manually with composer:
+
+```sh
+composer require fof/default-group
+```
+
+### Updating
+
+```sh
+composer update fof/default-group
+```
+
+### Links
+
+- [Packagist](https://packagist.org/packages/fof/default-group)
+- [GitHub](https://github.com/FriendsOfFlarum/default-group)
+- [Original by @luceos](https://discuss.flarum.org/d/849-hyn-default-group-assigning-default-group-to-new-users)
+
+An extension by [FriendsOfFlarum](https://github.com/FriendsOfFlarum).
