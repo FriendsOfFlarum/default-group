@@ -1,0 +1,4 @@
+fof-default-group:
+  admin:
+    settings:
+      info: "Itt tudod kiválasztani azt a csoportot, amelyhez automatikusan hozzárendelődnek a felhasználók regisztrációjuk aktiválása után."
