@@ -32,8 +32,8 @@ export default class DefaultGroupSettingsModal extends SettingsModal {
                 <Dropdown label={[icon(group.icon() || icons[group.id()]), '\t', group.namePlural()]} buttonClassName="Button Button--danger">
                     {app.store
                         .all('groups')
-                        .filter(g => g.id() != 2)
-                        .map(g =>
+                        .filter((g) => g.id() != 2)
+                        .map((g) =>
                             Button.component({
                                 active: group.id() === g.id(),
                                 disabled: group && group.id() === g.id(),
