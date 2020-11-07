@@ -5,8 +5,8 @@ import icon from 'flarum/helpers/icon';
 import Group from 'flarum/models/Group';
 
 export default class DefaultGroupSettingsModal extends SettingsModal {
-    init() {
-        super.init();
+    oninit(vnode) {
+        super.oninit(vnode);
 
         this.selected = this.setting('fof-default-group.group');
     }
@@ -37,12 +37,11 @@ export default class DefaultGroupSettingsModal extends SettingsModal {
                             Button.component({
                                 active: group.id() === g.id(),
                                 disabled: group && group.id() === g.id(),
-                                children: g.namePlural(),
                                 icon: g.icon() || icons[g.id()],
                                 onclick: () => {
                                     this.selected(g.id());
                                 },
-                            })
+                            }, g.namePlural())
                         )}
                 </Dropdown>
             </div>,
