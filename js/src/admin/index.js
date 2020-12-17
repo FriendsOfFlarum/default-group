@@ -1,5 +1,5 @@
-import DefaultGroupSettingsModal from './components/DefaultGroupSettingsModal';
+import DefaultGroupSettingsPage from './components/DefaultGroupSettingsPage';
 
 app.initializers.add('fof/default-group', () => {
-    app.extensionSettings['fof-default-group'] = () => app.modal.show(DefaultGroupSettingsModal);
+    app.extensionData.for('fof-default-group').registerPage(DefaultGroupSettingsPage);
 });
