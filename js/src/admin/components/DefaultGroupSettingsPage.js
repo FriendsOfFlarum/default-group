@@ -1,8 +1,8 @@
-import ExtensionPage from 'flarum/components/ExtensionPage';
-import Button from 'flarum/components/Button';
-import Dropdown from 'flarum/components/Dropdown';
-import icon from 'flarum/helpers/icon';
-import Group from 'flarum/models/Group';
+import ExtensionPage from 'flarum/admin/components/ExtensionPage';
+import Button from 'flarum/common/components/Button';
+import Dropdown from 'flarum/common/components/Dropdown';
+import icon from 'flarum/common/helpers/icon';
+import Group from 'flarum/common/models/Group';
 
 export default class DefaultGroupSettingsPage extends ExtensionPage {
     oninit(vnode) {
