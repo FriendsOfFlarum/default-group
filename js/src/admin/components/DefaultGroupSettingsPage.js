@@ -21,7 +21,7 @@ export default class DefaultGroupSettingsPage extends ExtensionPage {
             <div className="container">
                 <div className="FoFDefaultGroupSettingsPage">
                     <div className="Form-group">
-                        <p>{app.translator.transChoice('fof-default-group.admin.settings.info')}</p>
+                        <p>{app.translator.trans('fof-default-group.admin.settings.info')}</p>
 
                         <Dropdown label={[icon(group.icon() || icons[group.id()]), '\t', group.namePlural()]} buttonClassName="Button Button--danger">
                             {app.store
