@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of fof/default-group.
+ *
+ * Copyright (c) FriendsOfFlarum.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace FoF\DefaultGroup\tests\integration\api;
 
 use Flarum\Group\Group;
@@ -10,7 +19,7 @@ use Flarum\User\User;
 class UserTest extends TestCase
 {
     use RetrievesAuthorizedUsers;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -30,15 +39,15 @@ class UserTest extends TestCase
                 '/api/users',
                 [
                     'authenticatedAs' => 1,
-                    'json' => [
+                    'json'            => [
                         'data' => [
                             'attributes' => [
-                                'username' => 'test',
-                                'password' => 'too-obscure',
-                                'email' => 'test@machine.local',
+                                'username'         => 'test',
+                                'password'         => 'too-obscure',
+                                'email'            => 'test@machine.local',
                                 'isEmailConfirmed' => 1,
                             ],
-                        ]
+                        ],
                     ],
                 ]
             )
@@ -68,15 +77,15 @@ class UserTest extends TestCase
                 '/api/users',
                 [
                     'authenticatedAs' => 1,
-                    'json' => [
+                    'json'            => [
                         'data' => [
                             'attributes' => [
-                                'username' => 'test2',
-                                'password' => 'too-obscure',
-                                'email' => 'test2@machine.local',
+                                'username'         => 'test2',
+                                'password'         => 'too-obscure',
+                                'email'            => 'test2@machine.local',
                                 'isEmailConfirmed' => 1,
                             ],
-                        ]
+                        ],
                     ],
                 ]
             )
