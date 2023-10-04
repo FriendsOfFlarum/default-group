@@ -12,6 +12,7 @@
 namespace FoF\DefaultGroup;
 
 use Flarum\Extend;
+use Flarum\Group\Group;
 use Flarum\User\Event\Activated;
 
 return [
@@ -25,5 +26,5 @@ return [
         ->listen(Activated::class, Listeners\AddDefaultGroup::class),
 
     (new Extend\Settings())
-        ->default('fof-default-group.group', 3),
+        ->default('fof-default-group.group', Group::MEMBER_ID),
 ];
