@@ -34,7 +34,7 @@ class AddDefaultGroup
     {
         $defaultGroup = Group::findOrFail($this->settings->get('fof-default-group.group'));
 
-        if ($defaultGroup && $defaultGroup->id !== Group::MEMBER_ID && !$event->user->groups->contains($defaultGroup)) {
+        if ($defaultGroup !== null && $defaultGroup->id !== Group::MEMBER_ID && !$event->user->groups->contains($defaultGroup)) {
             $event->user->groups()->attach($defaultGroup->id);
         }
     }
