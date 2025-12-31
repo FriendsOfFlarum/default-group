@@ -21,7 +21,7 @@ class AddDefaultGroup
     {
     }
 
-    public function handle(Activated $event)
+    public function handle(Activated $event): void
     {
         $defaultGroup = Group::find($this->settings->get('fof-default-group.group'));
 

@@ -20,7 +20,7 @@ class GroupDeleted
     {
     }
 
-    public function handle(Deleted $event)
+    public function handle(Deleted $event): void
     {
         $defaultGroupId = $this->settings->get('fof-default-group.group');
 

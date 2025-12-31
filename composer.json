@@ -19,18 +19,12 @@
         }
     ],
     "require": {
-        "flarum/core": "^2.0.0-beta"
+        "flarum/core": "^2.0.0"
     },
     "authors": [
         {
-            "name": "Daniël Klabbers",
-            "email": "daniel+hyn@klabbers.email",
-            "homepage": "https://luceos.com"
-        },
-        {
-            "name": "David Sevilla Martín",
-            "email": "me+fof@datitisev.me",
-            "role": "Developer"
+            "name": "FoF Team",
+            "email": "team@friendsofflarum.org"
         }
     ],
     "autoload": {
@@ -79,7 +73,9 @@
         "analyse:phpstan": "Run static analysis"
     },
     "require-dev": {
-        "flarum/testing": "^2.0.0-beta",
-        "flarum/phpstan": "^2.0.0-beta"
-    }
+        "flarum/testing": "^2.0.0",
+        "flarum/phpstan": "^2.0.0"
+    },
+    "minimum-stability": "beta",
+    "prefer-stable": true
 }
