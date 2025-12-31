@@ -100,4 +100,42 @@ class UserTest extends TestCase
 
         $this->assertEquals([Group::MODERATOR_ID], $user->groups->pluck('id')->all());
     }
+
+    /**
+     * @test
+     */
+    public function new_user_can_register_even_when_configured_default_group_does_not_exist()
+    {
+        $this->setting('fof-default-group.group', 9999); // Non-existent group ID.
+
+        $response = $this->send(
+            $this->request(
+                'POST',
+                '/api/users',
+                [
+                    'authenticatedAs' => 1,
+                    'json'            => [
+                        'data' => [
+                            'attributes' => [
+                                'username'         => 'test3',
+                                'password'         => 'too-obscure',
+                                'email'            => 'test3@machine.local',
+                                'isEmailConfirmed' => 1,
+                            ],
+                        ],
+                    ],
+                ]
+            )
+        );
+
+        $this->assertEquals(201, $response->getStatusCode());
+
+        /** @var User $user */
+        $user = User::query()->with('groups')->where('username', 'test3')->firstOrFail();
+
+        $this->assertEquals(1, $user->is_email_confirmed);
+
+        // The `Member` group is the default group for new users, and does not appear in the `groups` relationship.
+        $this->assertEmpty($user->groups->pluck('id')->all());
+    }
 }
