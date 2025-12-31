@@ -2,7 +2,7 @@ import app from 'flarum/admin/app';
 import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 import Button from 'flarum/common/components/Button';
 import Dropdown from 'flarum/common/components/Dropdown';
-import icon from 'flarum/common/helpers/icon';
+import Icon from 'flarum/common/components/Icon';
 import Group from 'flarum/common/models/Group';
 
 export default class DefaultGroupSettingsPage extends ExtensionPage {
@@ -24,7 +24,7 @@ export default class DefaultGroupSettingsPage extends ExtensionPage {
           <div className="Form-group">
             <p>{app.translator.trans('fof-default-group.admin.settings.info')}</p>
 
-            <Dropdown label={[icon(group.icon() || icons[group.id()]), '\t', group.namePlural()]} buttonClassName="Button Button--danger">
+            <Dropdown label={[<Icon name={group.icon() || icons[group.id()]} />, '\t', group.namePlural()]} buttonClassName="Button Button--danger">
               {app.store
                 .all('groups')
                 .filter((g) => g.id() != 2)
