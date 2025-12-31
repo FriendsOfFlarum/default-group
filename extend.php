@@ -12,6 +12,7 @@
 namespace FoF\DefaultGroup;
 
 use Flarum\Extend;
+use Flarum\Group\Event\Deleted;
 use Flarum\Group\Group;
 use Flarum\User\Event\Activated;
 
@@ -23,7 +24,8 @@ return [
     new Extend\Locales(__DIR__.'/resources/locale'),
 
     (new Extend\Event())
-        ->listen(Activated::class, Listeners\AddDefaultGroup::class),
+        ->listen(Activated::class, Listeners\AddDefaultGroup::class)
+        ->listen(Deleted::class, Listeners\GroupDeleted::class),
 
     (new Extend\Settings())
         ->default('fof-default-group.group', Group::MEMBER_ID),

@@ -11,11 +11,10 @@
 
 namespace FoF\DefaultGroup\Listeners;
 
-use Flarum\Group\Group;
+use Flarum\Group\Event\Deleted;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Flarum\User\Event\Activated;
 
-class AddDefaultGroup
+class GroupDeleted
 {
     /**
      * @var SettingsRepositoryInterface
@@ -30,12 +29,12 @@ class AddDefaultGroup
         $this->settings = $settings;
     }
 
-    public function handle(Activated $event)
+    public function handle(Deleted $event)
     {
-        $defaultGroup = Group::find($this->settings->get('fof-default-group.group'));
+        $defaultGroupId = $this->settings->get('fof-default-group.group');
 
-        if (!empty($defaultGroup) && $defaultGroup->id !== Group::MEMBER_ID && !$event->user->groups->contains($defaultGroup)) {
-            $event->user->groups()->attach($defaultGroup->id);
+        if ($defaultGroupId === $event->group->id) {
+            $this->settings->set('fof-default-group.group', null);
         }
     }
 }
