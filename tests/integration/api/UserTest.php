@@ -15,6 +15,7 @@ use Flarum\Group\Group;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
 use Flarum\User\User;
+use PHPUnit\Framework\Attributes\Test;
 
 class UserTest extends TestCase
 {
@@ -28,9 +29,7 @@ class UserTest extends TestCase
         $this->setting('mail_driver', 'log');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function new_activated_user_belongs_to_member_group_by_default()
     {
         $response = $this->send(
@@ -64,9 +63,7 @@ class UserTest extends TestCase
         $this->assertEmpty($user->groups->pluck('id')->all());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function new_activated_user_belongs_to_default_selected_group()
     {
         $this->setting('fof-default-group.group', Group::MODERATOR_ID);
@@ -101,9 +98,7 @@ class UserTest extends TestCase
         $this->assertEquals([Group::MODERATOR_ID], $user->groups->pluck('id')->all());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function new_user_can_register_even_when_configured_default_group_does_not_exist()
     {
         $this->setting('fof-default-group.group', 9999); // Non-existent group ID.
